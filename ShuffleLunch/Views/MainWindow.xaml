@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -54,6 +55,17 @@
 		</Grid>
 
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+				<ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding Path=AddUserName}"/>
+            <Button Grid.Column="1" Command="{Binding ButtonAddUser}">
+				<TextBlock Text="追加" />
+			</Button>
+        </Grid>
+
+        <Grid Grid.Row="3">
             <ListBox ItemsSource="{Binding Path=ShuffleResultList}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -89,7 +101,7 @@
 			</ListBox>
 		</Grid>
 		
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
             <Button Command="{Binding ButtonShuffle}">
 				<TextBlock Text="シャッフル" />
 			</Button>

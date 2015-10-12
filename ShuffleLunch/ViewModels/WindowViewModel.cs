@@ -110,6 +110,20 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		#region AddUserName 変更通知プロパティ
+
+		private string _addUserName;
+		public string AddUserName
+		{
+			get { return _addUserName; }
+			set
+			{
+				SetProperty(ref _addUserName, value);
+			}
+		}
+
+		#endregion
+
 		private LunchInfo _lunchInfo;
 
 		/// <summary>
@@ -121,6 +135,11 @@ namespace ShuffleLunch.ViewModels
 		/// 参加者をシャッフル
 		/// </summary>
 		public ICommand ButtonShuffle { get; private set; }
+
+		/// <summary>
+		/// 参加者追加
+		/// </summary>
+		public ICommand ButtonAddUser { get; private set; }
 
 		public WindowViewModel()
 		{
@@ -153,6 +172,24 @@ namespace ShuffleLunch.ViewModels
 
 				ShuffleResultList = new ObservableCollection<ShuffleResult>(shuffle.Get());
 
+			});
+
+			ButtonAddUser = new DelegateCommand(_ =>
+			{
+				var deskList = new List<string>();
+				for (int i = 0; i < DeskList.Count; i++)
+				{
+					deskList.Add(DeskList[i].name);
+				}
+				var personAndDesk = new PersonAndDesk
+				{
+					name = AddUserName,
+					desk = deskList,
+					selectDesk = 0,
+					image = @""
+				};
+				PersonAndDeskList.Add(personAndDesk);
+				AddUserName = "";
 			});
 		}
 
