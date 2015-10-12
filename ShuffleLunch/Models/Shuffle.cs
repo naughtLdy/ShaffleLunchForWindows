@@ -30,11 +30,6 @@ namespace ShuffleLunch.Models
 				_shuffleResult.Add(shuffleResult);
 			}
 
-			// 座席ランダムの為の乱数生成
-			// 一度のランダム生成だと規則性が出るので二段階で乱数を生成する
-			var r = new Random();
-			var r2 = new Random(r.Next());
-
 			foreach (var personAndDesk in personAndDeskList)
 			{
 				if (personAndDesk.selectDesk != 0)
@@ -48,17 +43,15 @@ namespace ShuffleLunch.Models
 				}
 			}
 
-
-
-			foreach (var personAndDesk in personAndDeskList)
+			int n = 0;
+			foreach (var personAndDesk in personAndDeskList.OrderBy(_ => Guid.NewGuid()).ToList<PersonAndDesk>())
 			{
 				if (personAndDesk.selectDesk == 0) {
-					var n = r2.Next(1, deskList.Count);
-					if (_shuffleResult[n - 1].person.Count >= _shuffleResult[n - 1].deskMax)
+					if (_shuffleResult[n].person.Count >= _shuffleResult[n].deskMax)
 					{
-						continue;
+						n++;
 					}
-					_shuffleResult[n - 1].person.Add(
+					_shuffleResult[n].person.Add(
 						new Person
 						{
 							name = personAndDesk.name,
