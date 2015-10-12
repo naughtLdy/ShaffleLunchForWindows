@@ -96,12 +96,31 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		#region ShuffleResultList 変更通知プロパティ
+
+		private ObservableCollection<ShuffleResult> _shuffleResultList = new ObservableCollection<ShuffleResult>();
+		public ObservableCollection<ShuffleResult> ShuffleResultList
+		{
+			get { return _shuffleResultList; }
+			set
+			{
+				SetProperty(ref _shuffleResultList, value);
+			}
+		}
+
+		#endregion
+
 		private LunchInfo _lunchInfo;
 
 		/// <summary>
 		/// ファイルオープン
 		/// </summary>
 		public ICommand FileOpen { get; private set; }
+
+		/// <summary>
+		/// 参加者をシャッフル
+		/// </summary>
+		public ICommand ButtonShuffle { get; private set; }
 
 		public WindowViewModel()
 		{
@@ -120,6 +139,19 @@ namespace ShuffleLunch.ViewModels
 				PersonList = new ObservableCollection<Person>(_lunchInfo.PersonList());
 				DeskList = new ObservableCollection<Desk>(_lunchInfo.DeskList());
 				PersonAndDeskList = new ObservableCollection<PersonAndDesk>(_lunchInfo.PersonAndDeskList());
+
+			});
+
+			ButtonShuffle = new DelegateCommand(_ =>
+			{
+				var shuffle = new Shuffle();
+				var b = shuffle.shuffle(DeskList.ToList<Desk>(), PersonAndDeskList.ToList<PersonAndDesk>());
+				if (b == false)
+				{
+					return;
+				}
+
+				ShuffleResultList = new ObservableCollection<ShuffleResult>(shuffle.Get());
 
 			});
 		}

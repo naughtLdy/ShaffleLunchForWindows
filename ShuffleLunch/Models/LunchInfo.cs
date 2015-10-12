@@ -69,6 +69,7 @@ namespace ShuffleLunch.Models
 				{
 					personAndDesk.desk.Add(_deskList[j].name);
 				}
+				personAndDesk.selectDesk = 0;
 				personAndDesk.image = _personList[i].image;
 				personAndDeskList.Add(personAndDesk);
             }
@@ -100,6 +101,8 @@ namespace ShuffleLunch.Models
 	{
 		public string name { get; set; }
 		public List<string> desk { get; set; }
+
+		public int selectDesk { get; set; }
 		public string image { get; set; }
 	}
 }

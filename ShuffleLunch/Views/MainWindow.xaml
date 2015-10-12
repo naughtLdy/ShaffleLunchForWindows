@@ -18,6 +18,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -42,7 +44,7 @@
                             <TextBlock Grid.Column="1" Text="{Binding Path=name}" />
                             <ComboBox Grid.Column="3"
 									  ItemsSource="{Binding Path=desk}"
-									  SelectedIndex="0">
+									  SelectedIndex="{Binding Path=selectDesk, Mode=TwoWay}">
                             </ComboBox>
                         </Grid>
 					</DataTemplate>
@@ -50,5 +52,47 @@
 				
 			</ListBox>
 		</Grid>
+
+        <Grid Grid.Row="2">
+            <ListBox ItemsSource="{Binding Path=ShuffleResultList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Path=deskName}"/>
+                            
+                            <ListBox Grid.Column="1" ItemsSource="{Binding Path=person}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+												<RowDefinition />
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+											<Image Grid.Row="0" Source="{Binding Path=image}" />
+                                            <TextBlock Grid.Row="1" Text="{Binding Path=name}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel ItemHeight="100" ItemWidth="100" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </Grid>
+                    </DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+		
+        <Grid Grid.Row="3">
+            <Button Command="{Binding ButtonShuffle}">
+				<TextBlock Text="シャッフル" />
+			</Button>
+        </Grid>
     </Grid>
 </Window>
