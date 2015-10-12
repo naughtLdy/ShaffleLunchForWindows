@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -78,5 +79,27 @@
                 </ListBox>
             </Grid>
         </Grid>
+        <Grid Grid.Row="2">
+            <ListBox ItemsSource="{Binding Path=PersonAndDeskList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Path=image}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Path=name}" />
+                            <ComboBox Grid.Column="3"
+									  ItemsSource="{Binding Path=desk}"
+									  SelectedIndex="0">
+                            </ComboBox>
+                        </Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+				
+			</ListBox>
+		</Grid>
     </Grid>
 </Window>

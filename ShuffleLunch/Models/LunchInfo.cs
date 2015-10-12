@@ -56,6 +56,24 @@ namespace ShuffleLunch.Models
 		{
 			return _personList;
 		}
+
+		public List<PersonAndDesk> PersonAndDeskList()
+		{
+			var personAndDeskList = new List<PersonAndDesk>();
+			for (int i = 0; i < _personList.Count; i++)
+			{
+				var personAndDesk = new PersonAndDesk();
+				personAndDesk.name = _personList[i].name;
+				personAndDesk.desk = new List<string>();
+				for (int j = 0; j < _deskList.Count; j++)
+				{
+					personAndDesk.desk.Add(_deskList[j].name);
+				}
+				personAndDesk.image = _personList[i].image;
+				personAndDeskList.Add(personAndDesk);
+            }
+			return personAndDeskList;
+		}
 	}
 
 	public class Rootobject
@@ -75,6 +93,13 @@ namespace ShuffleLunch.Models
 	{
 		public string name { get; set; }
 		public string desk { get; set; }
+		public string image { get; set; }
+	}
+
+	public class PersonAndDesk
+	{
+		public string name { get; set; }
+		public List<string> desk { get; set; }
 		public string image { get; set; }
 	}
 }

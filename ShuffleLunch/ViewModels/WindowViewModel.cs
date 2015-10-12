@@ -82,6 +82,20 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		#region PersonAndDeskList 変更通知プロパティ
+
+		private ObservableCollection<PersonAndDesk> _personAndDeskList = new ObservableCollection<PersonAndDesk>();
+		public ObservableCollection<PersonAndDesk> PersonAndDeskList
+		{
+			get { return _personAndDeskList; }
+			set
+			{
+				SetProperty(ref _personAndDeskList, value);
+			}
+		}
+
+		#endregion
+
 		private LunchInfo _lunchInfo;
 
 		/// <summary>
@@ -105,6 +119,7 @@ namespace ShuffleLunch.ViewModels
 
 				PersonList = new ObservableCollection<Person>(_lunchInfo.PersonList());
 				DeskList = new ObservableCollection<Desk>(_lunchInfo.DeskList());
+				PersonAndDeskList = new ObservableCollection<PersonAndDesk>(_lunchInfo.PersonAndDeskList());
 
 			});
 		}
