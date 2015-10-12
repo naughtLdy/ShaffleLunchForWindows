@@ -11,7 +11,17 @@ namespace ShuffleLunch.Models
 {
 	class LunchInfo
 	{
-		public static Rootobject Get()
+		private List<Desk> _deskList;
+		private List<Person> _personList;
+
+		public LunchInfo()
+		{
+			_deskList = new List<Desk>();
+			_personList = new List<Person>();
+
+		}
+
+		public bool Get()
 		{
 
 			var dlg = new OpenFileDialog();
@@ -28,11 +38,23 @@ namespace ShuffleLunch.Models
 				using (var file = new StreamReader(stream))
 				{
 					var jsonData = JsonConvert.DeserializeObject<Rootobject>(file.ReadToEnd());
-					return jsonData;
+					_deskList = jsonData.desks.ToList<Desk>();
+					_personList = jsonData.persons.ToList<Person>();
+					return true;
 				}
 			}
 
-			return new Rootobject();
+			return false;
+		}
+
+		public List<Desk> DeskList()
+		{
+			return _deskList;
+		}
+
+		public List<Person> PersonList()
+		{
+			return _personList;
 		}
 	}
 

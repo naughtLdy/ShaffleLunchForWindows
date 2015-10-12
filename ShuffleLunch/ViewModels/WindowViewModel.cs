@@ -82,6 +82,8 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		private LunchInfo _lunchInfo;
+
 		/// <summary>
 		/// ファイルオープン
 		/// </summary>
@@ -91,11 +93,18 @@ namespace ShuffleLunch.ViewModels
 		{
 			Title = "ShuffleLunch";
 
+			_lunchInfo = new LunchInfo();
+
 			FileOpen = new DelegateCommand(_ =>
 			{
-				var jsonData = Models.LunchInfo.Get();
-				PersonList = new ObservableCollection<Person>(jsonData.persons);
-				DeskList = new ObservableCollection<Desk>(jsonData.desks);
+				var b = _lunchInfo.Get();
+				if (b == false)
+				{
+					return;
+				}
+
+				PersonList = new ObservableCollection<Person>(_lunchInfo.PersonList());
+				DeskList = new ObservableCollection<Desk>(_lunchInfo.DeskList());
 
 			});
 		}
