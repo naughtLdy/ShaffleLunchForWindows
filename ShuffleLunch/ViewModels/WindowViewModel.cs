@@ -1,10 +1,14 @@
-﻿using System;
+﻿using lunch_proto.Utils;
+using ShuffleLunch.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ShuffleLunch.ViewModels
 {
@@ -50,9 +54,50 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		#region DeskList 変更通知プロパティ
+
+		private ObservableCollection<Desk> _deskList = new ObservableCollection<Desk>();
+		public ObservableCollection<Desk> DeskList
+		{
+			get { return _deskList; }
+			set
+			{
+				SetProperty(ref _deskList, value);
+			}
+		}
+
+		#endregion
+
+		#region PersonList 変更通知プロパティ
+
+		private ObservableCollection<Person> _personList = new ObservableCollection<Person>();
+		public ObservableCollection<Person> PersonList
+		{
+			get { return _personList; }
+			set
+			{
+				SetProperty(ref _personList, value);
+			}
+		}
+
+		#endregion
+
+		/// <summary>
+		/// ファイルオープン
+		/// </summary>
+		public ICommand FileOpen { get; private set; }
+
 		public WindowViewModel()
 		{
 			Title = "ShuffleLunch";
+
+			FileOpen = new DelegateCommand(_ =>
+			{
+				var jsonData = Models.LunchInfo.Get();
+				PersonList = new ObservableCollection<Person>(jsonData.persons);
+				DeskList = new ObservableCollection<Desk>(jsonData.desks);
+
+			});
 		}
 
 	}
