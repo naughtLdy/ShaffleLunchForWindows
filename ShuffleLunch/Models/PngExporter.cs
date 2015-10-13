@@ -9,7 +9,7 @@ namespace ShuffleLunch.Models
         public static void Export(FrameworkElement element)
         {
             // render uielement
-            var rtb = new RenderTargetBitmap((int)element.ActualWidth, (int)element.ActualHeight, 96, 96, PixelFormats.Rgb24);
+            var rtb = new RenderTargetBitmap((int)element.ActualWidth, (int)element.ActualHeight, 96, 96, PixelFormats.Default);
             rtb.Render(element);
             // save to png
             BitmapEncoder pngEncoder = new PngBitmapEncoder();
