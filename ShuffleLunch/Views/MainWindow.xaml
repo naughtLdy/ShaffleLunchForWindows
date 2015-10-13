@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="{Binding Title}"
 		Height="350"
-		Width="525">
+		Width="525"
+		FontSize="20">
 
     <Window.DataContext>
         <vm:WindowViewModel />
@@ -40,9 +41,14 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="{Binding Path=image}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Path=name}" />
+                        <Image Grid.Column="0" 
+							   Width="100"
+							   Source="{Binding Path=image}" />
+                        <TextBlock Grid.Column="1" 
+								   Width="200"
+								   Text="{Binding Path=name}" />
                         <ComboBox Grid.Column="3"
+								  Width="250"
 								  ItemsSource="{Binding Path=desk}"
 								  SelectedIndex="{Binding Path=selectDesk, Mode=TwoWay}">
                         </ComboBox>
@@ -71,10 +77,13 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Path=deskName}"/>
+                        <TextBlock Grid.Column="0" 
+								   HorizontalAlignment="Center"
+								   FontSize="30"
+								   Text="{Binding Path=deskName}"/>
 
                         <ListBox Grid.Column="1" ItemsSource="{Binding Path=person}">
                             <ListBox.ItemTemplate>
@@ -84,14 +93,18 @@
                                             <RowDefinition />
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <Image Grid.Row="0" Source="{Binding Path=image}" />
-                                        <TextBlock Grid.Row="1" Text="{Binding Path=name}" />
+                                        <Image Grid.Row="0" 
+											   HorizontalAlignment="Center"
+											   Source="{Binding Path=image}" />
+                                        <TextBlock Grid.Row="1" 
+												   HorizontalAlignment="Center"
+												   Text="{Binding Path=name}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel ItemHeight="100" ItemWidth="100" />
+                                    <WrapPanel ItemHeight="120" ItemWidth="120" />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
