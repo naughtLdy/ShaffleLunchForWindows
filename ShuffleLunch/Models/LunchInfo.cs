@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +60,10 @@ namespace ShuffleLunch.Models
 
 		public List<PersonAndDesk> PersonAndDeskList()
 		{
+			var myAssembly = Assembly.GetEntryAssembly();
+			string path = myAssembly.Location;
+			path = path.Replace("ShuffleLunch.exe", "");
+
 			var personAndDeskList = new List<PersonAndDesk>();
 			for (int i = 0; i < _personList.Count; i++)
 			{
@@ -70,7 +75,14 @@ namespace ShuffleLunch.Models
 					personAndDesk.desk.Add(_deskList[j].name);
 				}
 				personAndDesk.selectDesk = 0;
-				personAndDesk.image = _personList[i].image;
+				if (_personList[i].image == "")
+				{
+					personAndDesk.image = path + @"image\NoImage.png";
+				}
+				else
+				{
+					personAndDesk.image = _personList[i].image;
+				}
 				personAndDeskList.Add(personAndDesk);
             }
 			return personAndDeskList;

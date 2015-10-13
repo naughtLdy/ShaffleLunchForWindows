@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -181,12 +182,16 @@ namespace ShuffleLunch.ViewModels
 				{
 					deskList.Add(DeskList[i].name);
 				}
+
+				var myAssembly = Assembly.GetEntryAssembly();
+				string path = myAssembly.Location;
+				path = path.Replace("ShuffleLunch.exe", "");
 				var personAndDesk = new PersonAndDesk
 				{
 					name = AddUserName,
 					desk = deskList,
 					selectDesk = 0,
-					image = @""
+					image = path + @"image\guest.png"
 				};
 				PersonAndDeskList.Add(personAndDesk);
 				AddUserName = "";
