@@ -26,8 +26,8 @@ namespace ShuffleLunch.Models
 		{
 
 			var dlg = new OpenFileDialog();
-			dlg.DefaultExt = ".js";
-			dlg.Filter = "js (.js)|*.js";
+			dlg.DefaultExt = ".json";
+			dlg.Filter = "json (.json)|*.json";
 
 			var result = dlg.ShowDialog();
 			if (result == true)
