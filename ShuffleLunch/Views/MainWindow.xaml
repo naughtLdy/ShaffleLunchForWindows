@@ -17,9 +17,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="2*" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
