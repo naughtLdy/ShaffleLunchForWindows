@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -14,11 +15,21 @@ namespace ShuffleLunch.Models
             // save to png
             BitmapEncoder pngEncoder = new PngBitmapEncoder();
             pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
-            // TODO: Use OpenFileDialog to choose target file.
-            using (var fs = System.IO.File.OpenWrite("export.png"))
-            {
-                pngEncoder.Save(fs);
-            }
+
+			var saveFileDialog = new SaveFileDialog();
+			saveFileDialog.FilterIndex = 1;
+			saveFileDialog.Filter = "pngファイル(.png)|*.png|All Files (*.*)|*.*";
+			saveFileDialog.FileName = "export.png";
+			bool? result = saveFileDialog.ShowDialog();
+			if (result == true)
+			{
+				using (var fs = System.IO.File.OpenWrite(saveFileDialog.FileName))
+				{
+					pngEncoder.Save(fs);
+				}
+			}
+
+			
         }
     }
 }
