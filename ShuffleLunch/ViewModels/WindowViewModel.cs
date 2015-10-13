@@ -8,6 +8,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace ShuffleLunch.ViewModels
@@ -141,6 +143,8 @@ namespace ShuffleLunch.ViewModels
 		/// </summary>
 		public ICommand ButtonAddUser { get; private set; }
 
+        public ICommand ExportImage { get; private set; }
+
 		public WindowViewModel()
 		{
 			Title = "ShuffleLunch";
@@ -191,6 +195,11 @@ namespace ShuffleLunch.ViewModels
 				PersonAndDeskList.Add(personAndDesk);
 				AddUserName = "";
 			});
+
+            ExportImage = new DelegateCommand(element =>
+            {
+                PngExporter.Export((FrameworkElement)element);
+            });
 		}
 
 	}

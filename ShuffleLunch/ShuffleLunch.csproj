@@ -63,6 +63,7 @@
     <Compile Include="Models\LunchInfo.cs" />
     <Compile Include="Models\PngExporter.cs" />
     <Compile Include="Models\Shuffle.cs" />
+    <Compile Include="Utils\BindableCommand.cs" />
     <Compile Include="Utils\DelegateCommand.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Page Include="Views\MainWindow.xaml">
