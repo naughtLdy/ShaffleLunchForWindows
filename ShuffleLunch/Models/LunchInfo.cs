@@ -81,7 +81,7 @@ namespace ShuffleLunch.Models
 				}
 				else
 				{
-					personAndDesk.image = _personList[i].image;
+					personAndDesk.image = path + @"image\" + _personList[i].image;
 				}
 				personAndDeskList.Add(personAndDesk);
             }
