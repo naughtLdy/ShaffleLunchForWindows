@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace ShuffleLunch.Models
 				var shuffleResult = new ShuffleResult();
 				shuffleResult.deskName = deskList[i].name;
 				shuffleResult.deskMax = deskList[i].max;
-				shuffleResult.person = new List<Person>();
+				shuffleResult.person = new ObservableCollection<Person>();
 				_shuffleResult.Add(shuffleResult);
 			}
 
@@ -73,6 +74,6 @@ namespace ShuffleLunch.Models
 	{
 		public string deskName { get; set; }
 		public int deskMax { get; set; }
-		public List<Person> person { get; set; }
+		public ObservableCollection<Person> person { get; set; }
 	}
 }
