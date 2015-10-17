@@ -26,5 +26,18 @@ namespace ShuffleLunch.Common.Extensions
             }
             return null;
         }
+
+        public static T FindAncestor<T>(this DependencyObject o)
+            where T : DependencyObject
+        {
+            var e = o;
+            while (e != null)
+            {
+                var p = VisualTreeHelper.GetParent(e);
+                if (p is T) return (T)p;
+                e = p;
+            }
+            return null;
+        }
     }
 }

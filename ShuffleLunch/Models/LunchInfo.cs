@@ -38,7 +38,7 @@ namespace ShuffleLunch.Models
 				using (var stream = new FileStream(filename, FileMode.Open))
 				using (var file = new StreamReader(stream))
 				{
-					var jsonData = JsonConvert.DeserializeObject<Rootobject>(file.ReadToEnd());
+					    var jsonData = JsonConvert.DeserializeObject<Rootobject>(file.ReadToEnd());
 					_deskList = jsonData.desks.ToList<Desk>();
 					_personList = jsonData.persons.ToList<Person>();
 					return true;
