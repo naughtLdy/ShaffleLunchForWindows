@@ -71,7 +71,10 @@
 			</Button>
         </Grid>
 
-        <ItemsControl Grid.Row="3" ItemsSource="{Binding ShuffleResultList}" Style="{StaticResource TableListStyle}">
+        <ItemsControl Grid.Row="3" 
+					  Name="ShuffleResult"
+					  ItemsSource="{Binding ShuffleResultList}" 
+					  Style="{StaticResource TableListStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -124,9 +127,20 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button Grid.Row="4" 
-				Command="{Binding ButtonShuffle}">
-            <TextBlock Text="シャッフル" />
-        </Button>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+					Command="{Binding ButtonShuffle}">
+                <TextBlock Text="シャッフル" />
+            </Button>
+            <Button Grid.Column="1" 
+					Command="{Binding ExportImage}"
+					CommandParameter="{Binding ElementName=ShuffleResult}">
+                <TextBlock Text="画像出力" />
+            </Button>
+        </Grid>
     </Grid>
 </Window>
