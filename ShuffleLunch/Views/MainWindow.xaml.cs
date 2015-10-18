@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ShuffleLunch.Common.Extensions;
 using ShuffleLunch.Models;
+using ShuffleLunch.ViewModels;
 
 namespace ShuffleLunch
 {
@@ -46,5 +47,28 @@ namespace ShuffleLunch
             ((ObservableCollection<Person>)lb?.ItemsSource)?.Add((Person)content);
         }
 
-    }
+		private void Window_Drop(object sender, DragEventArgs e)
+		{
+			var dropfiles = (string[])(e.Data.GetData(DataFormats.FileDrop));
+			if (dropfiles == null)
+			{
+				return;
+			}
+
+			((WindowViewModel)DataContext).SetList(dropfiles[0]);
+		}
+
+		private void Window_PreviewDragOver(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+			{
+				e.Effects = DragDropEffects.Copy;
+			}
+			else
+			{
+				e.Effects = DragDropEffects.None;
+			}
+			e.Handled = true;
+		}
+	}
 }

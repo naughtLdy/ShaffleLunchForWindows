@@ -33,7 +33,10 @@
         </Menu>
 
         <ListBox Grid.Row="1" 
-				 ItemsSource="{Binding Path=PersonAndDeskList}">
+				 ItemsSource="{Binding Path=PersonAndDeskList}"
+				 AllowDrop="True"
+				 Drop="Window_Drop"
+				 PreviewDragOver="Window_PreviewDragOver">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

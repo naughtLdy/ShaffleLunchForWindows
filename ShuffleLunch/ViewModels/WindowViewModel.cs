@@ -201,11 +201,30 @@ namespace ShuffleLunch.ViewModels
 				AddUserName = "";
 			});
 
-            ExportImage = new DelegateCommand(element =>
-            {
-                PngExporter.Export((FrameworkElement)element);
-            });
+			ExportImage = new DelegateCommand(element =>
+			{
+				PngExporter.Export((FrameworkElement)element);
+			});
 		}
 
+		public bool SetList(string filename)
+		{
+			if (string.IsNullOrEmpty(filename) == true || filename.EndsWith("json") == false)
+			{
+				return false;
+			}
+
+			var r = _lunchInfo.SetList(filename);
+			if (r == false)
+			{
+				return false;
+			}
+
+			PersonList = new ObservableCollection<Person>(_lunchInfo.PersonList());
+			DeskList = new ObservableCollection<Desk>(_lunchInfo.DeskList());
+			PersonAndDeskList = new ObservableCollection<PersonAndDesk>(_lunchInfo.PersonAndDeskList());
+
+			return true;
+		}
 	}
 }

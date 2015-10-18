@@ -22,6 +22,19 @@ namespace ShuffleLunch.Models
 
 		}
 
+		public bool SetList(string filename)
+		{
+			using (var stream = new FileStream(filename, FileMode.Open))
+			using (var file = new StreamReader(stream))
+			{
+				var jsonData = JsonConvert.DeserializeObject<Rootobject>(file.ReadToEnd());
+				_deskList = jsonData.desks.ToList<Desk>();
+				_personList = jsonData.persons.ToList<Person>();
+			}
+
+			return true;
+		}
+
 		public bool Get()
 		{
 
@@ -34,15 +47,9 @@ namespace ShuffleLunch.Models
 			{
 				// Open document
 				var filename = dlg.FileName;
+				var r = SetList(filename);
 
-				using (var stream = new FileStream(filename, FileMode.Open))
-				using (var file = new StreamReader(stream))
-				{
-					    var jsonData = JsonConvert.DeserializeObject<Rootobject>(file.ReadToEnd());
-					_deskList = jsonData.desks.ToList<Desk>();
-					_personList = jsonData.persons.ToList<Person>();
-					return true;
-				}
+				return r;
 			}
 
 			return false;
