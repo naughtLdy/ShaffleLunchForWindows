@@ -8,6 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="ShuffleLunch.MainWindow"
         mc:Ignorable="d"
         Title="{Binding Title}"
+		WindowState="Maximized"
 		Height="350"
 		Width="525"
 		FontSize="20">
