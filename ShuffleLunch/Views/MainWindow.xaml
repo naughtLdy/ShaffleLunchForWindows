@@ -68,7 +68,7 @@
                 
             </TabItem>
 
-            <TabItem Height="28" Header="結果" >
+            <TabItem Height="28" Header="座席表" >
                 <!-- Grid で囲まないと、ItemsControl内を上手くキャプチャできない為 -->
                 <Grid Grid.Row="3">
                     <ItemsControl Name="ShuffleResult"
@@ -148,7 +148,7 @@
 					 Text="{Binding Path=AddUserName}"/>
             <Button Grid.Column="1" 
 					Command="{Binding ButtonAddUser}">
-                <TextBlock Text="追加" />
+                <TextBlock Text="参加者追加" />
             </Button>
         </Grid>
 
