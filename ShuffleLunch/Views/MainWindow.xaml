@@ -68,11 +68,12 @@
                 </ListBox>
             </TabItem>
 
-            <TabItem Height="28" Header="座席表" >
-                <ItemsControl Grid.Row="3"
-							  Name="ShuffleResult"
+            <TabItem Height="28"
+					 Header="座席表" >
+                <ItemsControl Name="ShuffleResult"
 							  ItemsSource="{Binding ShuffleResultList}" 
-							  Style="{StaticResource TableListStyle}">
+							  Style="{StaticResource TableListStyle}"
+							  ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Background="White">
