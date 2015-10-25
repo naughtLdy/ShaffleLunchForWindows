@@ -20,9 +20,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
+            <RowDefinition />
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="2*" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -33,34 +32,112 @@
             </MenuItem>
         </Menu>
 
-        <ListBox Grid.Row="1" 
-				 ItemsSource="{Binding Path=PersonAndDeskList}"
-				 AllowDrop="True"
-				 Drop="Window_Drop"
-				 PreviewDragOver="Window_PreviewDragOver">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" 
+        <TabControl Grid.Row="1"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch" >
+
+            <TabItem Name="tabItem1" Height="28" Header="参加者リスト" >
+                <ListBox ItemsSource="{Binding Path=PersonAndDeskList}"
+						 AllowDrop="True"
+						 Drop="Window_Drop"
+						 PreviewDragOver="Window_PreviewDragOver">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" 
 							   Width="50"
 							   Source="{Binding Path=image}" />
-                        <TextBlock Grid.Column="1" 
+                                <TextBlock Grid.Column="1" 
 								   Width="200"
 								   Text="{Binding Path=name}" />
-                        <ComboBox Grid.Column="3"
+                                <ComboBox Grid.Column="3"
 								  Width="250"
 								  ItemsSource="{Binding Path=desk}"
 								  SelectedIndex="{Binding Path=selectDesk, Mode=TwoWay}">
-                        </ComboBox>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                </ComboBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                
+            </TabItem>
+
+            <TabItem Height="28" Header="結果" >
+                <!-- Grid で囲まないと、ItemsControl内を上手くキャプチャできない為 -->
+                <Grid Grid.Row="3">
+                    <ItemsControl Name="ShuffleResult"
+						  ItemsSource="{Binding ShuffleResultList}" 
+						  Style="{StaticResource TableListStyle}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" 
+									   HorizontalAlignment="Center"
+									   FontSize="30"
+									   Text="{Binding Path=deskName}"/>
+
+                                    <ListBox Grid.Column="1"
+									 ItemsSource="{Binding person}"
+									 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+									 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+									 AllowDrop="True"
+									 PreviewMouseLeftButtonDown="UIElement_OnPreviewMouseLeftButtonDown" 
+									 DragOver="UIElement_OnDragOver"
+									 Drop="UIElement_OnDrop">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition />
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Image Grid.Row="0" 
+												   HorizontalAlignment="Center"
+												   Source="{Binding Path=image}" />
+                                                    <TextBlock Grid.Row="1" 
+												   HorizontalAlignment="Center"
+												   Text="{Binding Path=name}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel ItemHeight="120" ItemWidth="120">
+                                                    <i:Interaction.Behaviors>
+                                                        <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.2">
+                                                            <ei:FluidMoveBehavior.EaseY>
+                                                                <CircleEase EasingMode="EaseOut"/>
+                                                            </ei:FluidMoveBehavior.EaseY>
+                                                            <ei:FluidMoveBehavior.EaseX>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </ei:FluidMoveBehavior.EaseX>
+                                                        </ei:FluidMoveBehavior>
+                                                    </i:Interaction.Behaviors>
+                                                </WrapPanel>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+
+
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -75,71 +152,8 @@
             </Button>
         </Grid>
 
-        <!-- Grid で囲まないと、ItemsControl内を上手くキャプチャできない為 -->
-		<Grid Grid.Row="3">
-            <ItemsControl Name="ShuffleResult"
-						  ItemsSource="{Binding ShuffleResultList}" 
-						  Style="{StaticResource TableListStyle}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" 
-									   HorizontalAlignment="Center"
-									   FontSize="30"
-									   Text="{Binding Path=deskName}"/>
 
-                            <ListBox Grid.Column="1"
-									 ItemsSource="{Binding person}"
-									 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-									 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-									 AllowDrop="True"
-									 PreviewMouseLeftButtonDown="UIElement_OnPreviewMouseLeftButtonDown" 
-									 DragOver="UIElement_OnDragOver"
-									 Drop="UIElement_OnDrop">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Image Grid.Row="0" 
-												   HorizontalAlignment="Center"
-												   Source="{Binding Path=image}" />
-                                            <TextBlock Grid.Row="1" 
-												   HorizontalAlignment="Center"
-												   Text="{Binding Path=name}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel ItemHeight="120" ItemWidth="120">
-                                            <i:Interaction.Behaviors>
-                                                <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.2">
-                                                    <ei:FluidMoveBehavior.EaseY>
-                                                        <CircleEase EasingMode="EaseOut"/>
-                                                    </ei:FluidMoveBehavior.EaseY>
-                                                    <ei:FluidMoveBehavior.EaseX>
-                                                        <CubicEase EasingMode="EaseOut"/>
-                                                    </ei:FluidMoveBehavior.EaseX>
-                                                </ei:FluidMoveBehavior>
-                                            </i:Interaction.Behaviors>
-                                        </WrapPanel>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
