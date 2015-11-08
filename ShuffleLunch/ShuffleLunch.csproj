@@ -84,6 +84,7 @@
     <Compile Include="Common\Extensions\VisualTreeHelperExtension.cs" />
     <Compile Include="Models\LunchInfo.cs" />
     <Compile Include="Models\PngExporter.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Shuffle.cs" />
     <Compile Include="Utils\BindableCommand.cs" />
     <Compile Include="Utils\DelegateCommand.cs" />
@@ -134,6 +135,13 @@
     <Content Include="TestData\TestData.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(ProjectDir)SettingFiles\DefaultParameter.json" "$(TargetDir)DefaultParameter.json"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

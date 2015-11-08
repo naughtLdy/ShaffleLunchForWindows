@@ -30,6 +30,8 @@ namespace ShuffleLunch.Models
 				var jsonData = JsonConvert.DeserializeObject<Rootobject>(file.ReadToEnd());
 				_deskList = jsonData.desks.ToList<Desk>();
 				_personList = jsonData.persons.ToList<Person>();
+
+				_personList = _personList.OrderBy(_ => _.name).ToList<Person>();
 			}
 
 			return true;
