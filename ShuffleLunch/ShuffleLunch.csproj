@@ -84,6 +84,7 @@
     <Compile Include="Common\Extensions\VisualTreeHelperExtension.cs" />
     <Compile Include="Models\LunchInfo.cs" />
     <Compile Include="Models\PngExporter.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Shuffle.cs" />
     <Compile Include="Utils\BindableCommand.cs" />
     <Compile Include="Utils\DelegateCommand.cs" />

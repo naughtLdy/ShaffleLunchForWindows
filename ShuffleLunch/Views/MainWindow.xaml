@@ -16,6 +16,10 @@
     <Window.DataContext>
         <vm:WindowViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+		<vm:WindowViewModel x:Key="viewmodels" />
+	</Window.Resources>
 	
     <Grid>
         <Grid.RowDefinitions>
@@ -52,7 +56,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" 
-									   Width="50"
+									   Width="{Binding ImageWidth, Source={StaticResource viewmodels}}"
 									   Source="{Binding Path=image}" />
                                 <TextBlock Grid.Column="1" 
 										   Width="200"
@@ -84,11 +88,11 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" 
 										   HorizontalAlignment="Center"
-										   FontSize="30"
+										   FontSize="{Binding FontSizeDesk, Source={StaticResource viewmodels}}"
 										   Text="{Binding Path=deskName}"/>
                                 <TextBlock Grid.Column="1" 
 										   HorizontalAlignment="Center"
-										   FontSize="30"
+										   FontSize="{Binding FontSizeDesk, Source={StaticResource viewmodels}}"
 										   Text="{Binding Path=person.Count}"/>
 
                                 <ListBox Grid.Column="2"
@@ -96,6 +100,8 @@
 										 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 										 ScrollViewer.VerticalScrollBarVisibility="Disabled"
 										 AllowDrop="True"
+										 BorderBrush="Black"
+										 BorderThickness="3"
 										 PreviewMouseLeftButtonDown="UIElement_OnPreviewMouseLeftButtonDown" 
 										 DragOver="UIElement_OnDragOver"
 										 Drop="UIElement_OnDrop">
@@ -111,13 +117,15 @@
 													   Source="{Binding Path=image}" />
                                                 <TextBlock Grid.Row="1" 
 														   HorizontalAlignment="Center"
+														   FontSize="{Binding FontSizePerson, Source={StaticResource viewmodels}}"
 														   Text="{Binding Path=name}" />
                                             </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel ItemHeight="120" ItemWidth="120">
+                                            <WrapPanel ItemHeight="{Binding ShuffleImageHeight, Source={StaticResource viewmodels}}" 
+													   ItemWidth="{Binding ShuffleImageWidth, Source={StaticResource viewmodels}}">
                                                 <i:Interaction.Behaviors>
                                                     <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.2">
                                                         <ei:FluidMoveBehavior.EaseY>

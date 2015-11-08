@@ -127,6 +127,96 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		#region FontSizeDesk 変更通知プロパティ
+
+		private int _fontSizeDesk;
+
+		public int FontSizeDesk
+		{
+			get { return _fontSizeDesk; }
+			set
+			{
+				SetProperty(ref _fontSizeDesk, value);
+			}
+		}
+
+		#endregion
+
+		#region FontSizePerson 変更通知プロパティ
+
+		private int _fontSizePerson;
+
+		public int FontSizePerson
+		{
+			get { return _fontSizePerson; }
+			set
+			{
+				SetProperty(ref _fontSizePerson, value);
+			}
+		}
+
+		#endregion
+
+		#region ImageWidth 変更通知プロパティ
+
+		private int _imageWidth;
+
+		public int ImageWidth
+		{
+			get { return _imageWidth; }
+			set
+			{
+				SetProperty(ref _imageWidth, value);
+			}
+		}
+
+		#endregion
+
+		#region ImageHeight 変更通知プロパティ
+
+		private int _imageHeight;
+
+		public int ImageHeight
+		{
+			get { return _imageHeight; }
+			set
+			{
+				SetProperty(ref _imageHeight, value);
+			}
+		}
+
+		#endregion
+
+		#region ShuffleImageWidth 変更通知プロパティ
+
+		private int _shuffleImageWidth;
+
+		public int ShuffleImageWidth
+		{
+			get { return _shuffleImageWidth; }
+			set
+			{
+				SetProperty(ref _shuffleImageWidth, value);
+			}
+		}
+
+		#endregion
+
+		#region ShuffleImageHeight 変更通知プロパティ
+
+		private int _shuffleImageHeight;
+
+		public int ShuffleImageHeight
+		{
+			get { return _shuffleImageHeight; }
+			set
+			{
+				SetProperty(ref _shuffleImageHeight, value);
+			}
+		}
+
+		#endregion
+
 		private LunchInfo _lunchInfo;
 
 		/// <summary>
@@ -151,6 +241,16 @@ namespace ShuffleLunch.ViewModels
 			Title = "ShuffleLunch";
 
 			_lunchInfo = new LunchInfo();
+
+			var setting = Setting.Instance;
+			setting.Get();
+			FontSizeDesk = setting.FontSizeDesk;
+			FontSizePerson = setting.FontSizePerson;
+			ImageWidth = setting.ImageWidth;
+			ImageHeight = setting.ImageHeight;
+			ShuffleImageWidth = setting.ShuffleImageWidth;
+			ShuffleImageHeight = setting.ShuffleImageHeight;
+
 
 			FileOpen = new DelegateCommand(_ =>
 			{

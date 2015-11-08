@@ -51,7 +51,13 @@ namespace ShuffleLunch.Models
 					if (_shuffleResult[n].person.Count >= _shuffleResult[n].deskMax)
 					{
 						n++;
+						if (n >= _shuffleResult.Count)
+						{
+							var s = new ShuffleResult { deskName = "", deskMax = int.MaxValue, person = new ObservableCollection<Person>() };
+							_shuffleResult.Add(s);
+						}
 					}
+					
 					_shuffleResult[n].person.Add(
 						new Person
 						{
