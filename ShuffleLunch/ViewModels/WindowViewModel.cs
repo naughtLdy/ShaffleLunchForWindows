@@ -217,6 +217,21 @@ namespace ShuffleLunch.ViewModels
 
 		#endregion
 
+		#region TabIndex 変更通知プロパティ
+
+		private bool _shuffleTabSelected;
+
+		public bool ShuffleTabSelected
+		{
+			get { return _shuffleTabSelected; }
+			set
+			{
+				SetProperty(ref _shuffleTabSelected, value);
+			}
+		}
+
+		#endregion
+
 		private LunchInfo _lunchInfo;
 
 		/// <summary>
@@ -251,6 +266,7 @@ namespace ShuffleLunch.ViewModels
 			ShuffleImageWidth = setting.ShuffleImageWidth;
 			ShuffleImageHeight = setting.ShuffleImageHeight;
 
+			ShuffleTabSelected = false;
 
 			FileOpen = new DelegateCommand(_ =>
 			{
@@ -276,6 +292,8 @@ namespace ShuffleLunch.ViewModels
 				}
 
 				ShuffleResultList = new ObservableCollection<ShuffleResult>(shuffle.Get());
+
+				ShuffleTabSelected = true;
 
 			});
 

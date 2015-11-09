@@ -73,7 +73,8 @@
             </TabItem>
 
             <TabItem Height="28"
-					 Header="座席表" >
+					 Header="座席表"
+					 IsSelected="{Binding ShuffleTabSelected}">
                 <ItemsControl Name="ShuffleResult"
 							  ItemsSource="{Binding ShuffleResultList}" 
 							  Style="{StaticResource TableListStyle}"
